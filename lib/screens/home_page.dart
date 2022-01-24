@@ -1,4 +1,3 @@
-import 'package:first_project/urls.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -7,11 +6,11 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        leading: Icon(Icons.menu_outlined),
-        title: Text("Profile"),
+        title: const Text("Profile"),
         centerTitle: true,
         elevation: 0,
       ),
+      drawer: const Drawer(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,10 +28,8 @@ class MyHomePage extends StatelessWidget {
             ),
             child: Column(
               children: <Widget>[
-                CircleAvatar(
-                  child: Image.network(
-                    "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Google_Images_2015_logo.svg/1200px-Google_Images_2015_logo.svg.png",
-                  ),
+                const CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/my_photo.jpeg"),
                   radius: 50,
                   backgroundColor: Colors.white,
                 ),
@@ -44,13 +41,13 @@ class MyHomePage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Text(
+                const Text(
                   'Flutter Developer',
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text(
                       "25",
                       style: TextStyle(fontSize: 14, color: Colors.white),
@@ -64,83 +61,78 @@ class MyHomePage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
+          getInfoLayout(
+            context,
+            title: "Contact Me",
+            icon: Icons.mail_outlined,
+            text: "binitkoirala17@gmail.com",
+          ),
+          getInfoLayout(
+            context,
+            icon: Icons.call_outlined,
+            text: "977980214214214",
+          ),
+          getInfoLayout(
+            context,
+            title: "Follow Me",
+            icon: Icons.language_outlined,
+            text: "https://www.binitkoirala.com.np",
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget getInfoLayout(context,
+      {String? title, required IconData icon, required String text}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null)
           Container(
             width: 120,
             color: Theme.of(context).primaryColor,
             padding: const EdgeInsets.all(15),
-            child: const Text(
-              "Contact Me",
-              style: TextStyle(
+            child: Text(
+              title,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 16,
               ),
             ),
           ),
+        if (title != null)
           const SizedBox(
             height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: const [
-                CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Icon(
-                    Icons.mail_outlined,
-                    size: 30,
-                    color: Colors.white,
-                  ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Icon(
+                  icon,
+                  size: 30,
+                  color: Colors.white,
                 ),
-                SizedBox(
-                  width: 15,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text(
+                text,
+                style: const TextStyle(
+                  fontSize: 18,
                 ),
-                Text(
-                  "binitkoirala17@gmail.com",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: const [
-                CircleAvatar(
-                  backgroundColor: Colors.black,
-                  child: Icon(
-                    Icons.call_outlined,
-                    size: 30,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  "+977-9804350997",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.red,
-        tooltip: 'Increment',
-        child: const Icon(
-          Icons.remove_circle_outline,
-          color: Colors.black,
         ),
-      ),
+      ],
     );
   }
 }
