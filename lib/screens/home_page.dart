@@ -1,6 +1,18 @@
+import 'package:first_project/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatelessWidget {
+  goToProfilePage(context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const ProfileScreen()
+          // {
+          //   return const ProfileScreen();
+          // },
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,16 +38,31 @@ class MyHomePage extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
             ),
-            getListTile(context, title: "Home", icon: Icons.home_outlined),
+            getListTile(
+              context,
+              title: "Home",
+              icon: Icons.home_outlined,
+            ),
             const SizedBox(
               height: 10,
             ),
-            getListTile(context, title: "Profile", icon: Icons.info_outlined),
+            getListTile(
+              context,
+              title: "Profile",
+              icon: Icons.info_outlined,
+              function: () {
+                goToProfilePage(context);
+              },
+            ),
             const SizedBox(
               height: 10,
             ),
             const Spacer(),
-            getListTile(context, title: "Logout", icon: Icons.logout_outlined),
+            getListTile(
+              context,
+              title: "Logout",
+              icon: Icons.logout_outlined,
+            ),
             const SizedBox(
               height: 10,
             ),
@@ -149,7 +176,12 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget getListTile(context, {required String title, required IconData icon}) {
+  Widget getListTile(
+    context, {
+    required String title,
+    required IconData icon,
+    Function? function,
+  }) {
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(
@@ -164,7 +196,9 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
         onTap: () {
-          print("I clicked $title");
+          if (function != null) {
+            function();
+          }
         },
         leading: Icon(
           icon,

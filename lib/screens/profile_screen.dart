@@ -5,8 +5,13 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+
     return Scaffold(
       appBar: AppBar(
+        leading: const Icon(
+          Icons.info_outlined,
+        ),
         title: const Text("Profile"),
         centerTitle: true,
         elevation: 0,
@@ -83,6 +88,66 @@ class ProfileScreen extends StatelessWidget {
                 )
               ],
             ),
+          ),
+          // Padding(
+          //   // width: ,
+          //   padding: EdgeInsets.all(16),
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(16.0),
+          //     child: Text(
+          //       "Text Button",
+          //       style: TextStyle(
+          //           // color: Colors.white,
+          //           ),
+          //     ),
+          //   ),
+          // ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              print("Successfully printed");
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    "My name is Binit Koirala",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
+            child: const Text("Elevated Button"),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              // ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text(
+                    "Successfully Cleared",
+                    textAlign: TextAlign.center,
+                  ),
+                  duration: Duration(seconds: 1),
+                ),
+              );
+            },
+            child: const Text("Clear Snackbar"),
+          ),
+
+          const SizedBox(
+            height: 30,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Go Home"),
           ),
         ],
       ),
