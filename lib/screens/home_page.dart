@@ -7,11 +7,41 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: const Text("Profile"),
+        title: const Text("Dashboard"),
         centerTitle: true,
         elevation: 0,
       ),
-      drawer: const Drawer(),
+      drawer: Drawer(
+        child: SafeArea(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: const Text("Binit Koirala"),
+              accountEmail: const Text("binitkoirala17@gmail.com"),
+              currentAccountPicture: const CircleAvatar(
+                backgroundImage: AssetImage("assets/images/my_photo.jpeg"),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            getListTile(context, title: "Home", icon: Icons.home_outlined),
+            const SizedBox(
+              height: 10,
+            ),
+            getListTile(context, title: "Profile", icon: Icons.info_outlined),
+            const SizedBox(
+              height: 10,
+            ),
+            const Spacer(),
+            getListTile(context, title: "Logout", icon: Icons.logout_outlined),
+            const SizedBox(
+              height: 10,
+            ),
+          ],
+        )),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,6 +145,33 @@ class MyHomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget getListTile(context, {required String title, required IconData icon}) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(
+          15,
+        ),
+      ),
+      elevation: 5,
+      child: ListTile(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            15,
+          ),
+        ),
+        onTap: () {
+          print("I clicked $title");
+        },
+        leading: Icon(
+          icon,
+        ),
+        tileColor: Colors.grey.shade200,
+        title: Text(title),
+        trailing: const Icon(Icons.arrow_right_outlined),
       ),
     );
   }

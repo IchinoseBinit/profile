@@ -15,3 +15,4 @@ else
     echo "Pushing data to remote server!!!"
     git push origin "${branch}"
 fi
+
